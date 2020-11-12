@@ -6,3 +6,6 @@ gem "sqlite3", "~> 1.3", ">= 1.3.11"
 
 #A gem to use Rails Database Migrations in non Rails projects
 gem "standalone_migrations"
+
+#A Ruby Library for dealing with money and currency conversion.
+gem "money", "~> 6.7", ">= 6.7.1"
