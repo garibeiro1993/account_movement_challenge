@@ -1,3 +1,8 @@
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby "2.7.2"
+
 # Active Record is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic.
 gem "activerecord"
 
