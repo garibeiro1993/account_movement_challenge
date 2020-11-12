@@ -3,7 +3,6 @@ require "yaml"
 require_relative "./operations/accounts/create"
 require_relative "./operations/transactions/create"
 require "money"
-require "pry"
 
 MONEY_ROUND = Money.rounding_mode = BigDecimal::ROUND_HALF_UP
 DEFAULT_CURRENCY = Money.locale_backend = :currency

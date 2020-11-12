@@ -50,7 +50,7 @@ git clone https://github.com/garibeiro1993/account_movement_challenge
 ```ruby
 # 1 - Acessar diretório da aplicação:
 
-cd account_movement_challeng
+cd account_movement_challenge
 
 # 2 - Executar o bundle para instalar as GEMS
 

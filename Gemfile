@@ -14,3 +14,6 @@ gem "standalone_migrations"
 
 #A Ruby Library for dealing with money and currency conversion.
 gem "money", "~> 6.7", ">= 6.7.1"
+
+#yaml
+gem "yaml"
