@@ -3,3 +3,6 @@ gem "activerecord"
 
 #This module allows Ruby programs to interface with the SQLite3 database engine
 gem "sqlite3", "~> 1.3", ">= 1.3.11"
+
+#A gem to use Rails Database Migrations in non Rails projects
+gem "standalone_migrations"
