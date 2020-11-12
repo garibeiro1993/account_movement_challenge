@@ -16,4 +16,7 @@ ActiveRecord::Base.establish_connection(file_config_db["development"])
 
 perform_account_creation = Operations::Accounts::Create.call(ARGV[0])
 perform_transaction_creation = Operations::Transactions::Create.call(ARGV[1])
+
+if perform_account_creation.success? && perform_transaction_creation.success?
     "Saldo final de #{Money.new(account.balance, "BRL").format} na conta #{account.id}"
+end
