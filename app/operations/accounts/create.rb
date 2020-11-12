@@ -6,20 +6,33 @@ require_relative "../application_operation"
 module Operations
   module Accounts
     class Create < ApplicationOperation
+      attr_reader :accounts_csv
+
       def initialize(accounts_csv)
-        @accounts_csv = CSV.read(accounts_csv).uniq { |account| account.first }
+        @accounts_csv = accounts_csv
       end
 
       def call
-        remove_all_accounts
+        validate_presence_csv
+        parse_csv
+        remove_duplicated_account
         create_accounts!
         result
       end
 
       private
 
-      def validate
-        return add_error("File not found") if @accounts_csv.nil?
+      def validate_presence_csv
+        return add_error("File not found") if accounts_csv.blank?
+        true
+      end
+
+      def parse_csv
+        @accounts_csv = CSV.read(accounts_csv)
+      end
+
+      def remove_duplicated_account
+        @accounts_csv = accounts_csv.uniq { |account| account.first }
       end
 
       def remove_all_accounts
@@ -28,7 +41,7 @@ module Operations
 
       def create_accounts!
         begin
-          @accounts_csv.each do |account|
+          accounts_csv.each do |account|
             Account.new(id: account[0], balance: account[1]).save!
           end
         rescue StandardError => e

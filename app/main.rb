@@ -3,6 +3,7 @@ require "yaml"
 require_relative "./operations/accounts/create"
 require_relative "./operations/transactions/create"
 require "money"
+require "pry"
 
 MONEY_ROUND = Money.rounding_mode = BigDecimal::ROUND_HALF_UP
 DEFAULT_CURRENCY = Money.locale_backend = :currency
@@ -13,6 +14,9 @@ def file_config_db
 end
 
 ActiveRecord::Base.establish_connection(file_config_db["development"])
+
+Account.delete_all
+Transaction.delete_all
 
 perform_account_creation = Operations::Accounts::Create.call(ARGV[0])
 perform_transaction_creation = Operations::Transactions::Create.call(ARGV[1])

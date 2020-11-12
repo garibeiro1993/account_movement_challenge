@@ -7,29 +7,33 @@ require_relative "../application_operation"
 module Operations
   module Transactions
     class Create < ApplicationOperation
+      attr_reader :transactions_csv
+
       def initialize(transactions_csv)
-        @transactions_csv = CSV.read(transactions_csv)
+        @transactions_csv = transactions_csv
       end
 
       def call
-        remove_all_transactions
+        validate_presence_csv
+        parse_csv
         create_transactions!
         result
       end
 
       private
 
-      def validate
-        return add_error("File not found") if @transactions_csv.nil?
+      def validate_presence_csv
+        return add_error("File not found") if transactions_csv.blank?
+        true
       end
 
-      def remove_all_transactions
-        Transaction.delete_all
+      def parse_csv
+        @transactions_csv = CSV.read(transactions_csv)
       end
 
       def create_transactions!
         begin
-          @transactions_csv.each do |transaction_csv|
+          transactions_csv.each do |transaction_csv|
             transaction = Transaction.new(
               account_id: transaction_csv[0],
               amount: transaction_csv[1],
